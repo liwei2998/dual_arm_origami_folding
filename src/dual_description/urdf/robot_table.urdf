@@ -15,7 +15,7 @@
         <link name="table_middle">
             <visual>
                 <geometry>
-                    <box size="0.6 1.2 0.705" />
+                    <box size="0.8 1.2 0.705" />
                 </geometry>
                 <origin xyz="0 0 0.3525" rpy="0 0 0" />
                 <material name="blue" />
@@ -31,7 +31,7 @@
         <link name="table_base_hong">
           <visual>
               <geometry>
-                  <box size="1.6 1.6 0.75" />
+                  <box size="1.2 1.8 0.75" />
               </geometry>
               <origin xyz="0 0 0.375" rpy="0 0 0" />
               <material name="blue" />
@@ -41,7 +41,7 @@
         <link name="upper_block_hong" >
           <visual>
               <geometry>
-                  <box size="0.2 0.2 0.02" />
+                  <box size="0.25 0.25 0.02" />
               </geometry>
               <origin xyz="0 0 0.01" rpy="0 0 0" />
               <material name="white" />
@@ -51,19 +51,19 @@
         <joint name="world_to_table_hong" type="fixed">
             <parent link="world" />
             <child link="table_base_hong" />
-            <origin xyz="-2 0 0" rpy="0 0 0" />
+            <origin xyz="-1.35 0 0" rpy="0 0 0" />
         </joint>
 
         <joint name="table_to_block_hong" type="fixed">
             <parent link="table_base_hong" />
             <child link="upper_block_hong" />
-            <origin xyz="0.7 0 0.75" rpy="0 0 0" />
+            <origin xyz="0.465 0 0.75" rpy="0 0 0" />
         </joint>
 
         <link name="table_base_kong">
           <visual>
               <geometry>
-                  <box size="1.6 1.6 0.75" />
+                  <box size="1.2 1.8 0.75" />
               </geometry>
               <origin xyz="0 0 0.375" rpy="0 0 0" />
               <material name="blue" />
@@ -73,7 +73,7 @@
         <link name="upper_block_kong" >
           <visual>
               <geometry>
-                  <box size="0.2 0.2 0.02" />
+                  <box size="0.25 0.25 0.02" />
                   <origin xyz="0 0 0.01" rpy="0 0 0" />
               </geometry>
               <material name="white" />
@@ -83,13 +83,13 @@
         <joint name="world_to_table_kong" type="fixed">
             <parent link="world" />
             <child link="table_base_kong" />
-            <origin xyz="2 0 0" rpy="0 0 0" />
+            <origin xyz="1.35 0 0" rpy="0 0 0" />
         </joint>
 
         <joint name="table_to_block_kong" type="fixed">
             <parent link="table_base_kong" />
             <child link="upper_block_kong" />
-            <origin xyz="-0.7 0 0.75" rpy="0 0 0" />
+            <origin xyz="-0.465 0 0.75" rpy="0 0 0" />
         </joint>
 
 
