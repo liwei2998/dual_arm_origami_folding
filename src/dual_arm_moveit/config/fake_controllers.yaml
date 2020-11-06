@@ -1,0 +1,24 @@
+controller_list:
+  - name: fake_hong_arm_controller
+    joints:
+      - hong_shoulder_pan_joint
+      - hong_shoulder_lift_joint
+      - hong_elbow_joint
+      - hong_wrist_1_joint
+      - hong_wrist_2_joint
+      - hong_wrist_3_joint
+  - name: fake_kong_arm_controller
+    joints:
+      - kong_shoulder_pan_joint
+      - kong_shoulder_lift_joint
+      - kong_elbow_joint
+      - kong_wrist_1_joint
+      - kong_wrist_2_joint
+      - kong_wrist_3_joint
+  - name: fake_hong_hand_controller
+    joints:
+      - finger_joint
+  - name: fake_kong_hand_controller
+    joints:
+      - rigid_rev_joint
+      - rigid_tip_joint

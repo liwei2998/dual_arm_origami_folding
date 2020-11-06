@@ -1,0 +1,505 @@
+<?xml version="1.0" ?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="dual_ur10">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="hong_arm">
+        <joint name="hong_shoulder_pan_joint" />
+        <joint name="hong_shoulder_lift_joint" />
+        <joint name="hong_elbow_joint" />
+        <joint name="hong_wrist_1_joint" />
+        <joint name="hong_wrist_2_joint" />
+        <joint name="hong_wrist_3_joint" />
+    </group>
+    <group name="kong_arm">
+        <joint name="kong_shoulder_pan_joint" />
+        <joint name="kong_shoulder_lift_joint" />
+        <joint name="kong_elbow_joint" />
+        <joint name="kong_wrist_1_joint" />
+        <joint name="kong_wrist_2_joint" />
+        <joint name="kong_wrist_3_joint" />
+    </group>
+    <group name="hong_hand">
+        <joint name="fts_fix" />
+        <joint name="measurment_joint" />
+        <joint name="ft_gripper_joint" />
+        <joint name="finger_joint" />
+        <joint name="left_outer_finger_joint" />
+        <joint name="left_inner_finger_joint" />
+        <joint name="left_inner_finger_pad_joint" />
+        <joint name="left_inner_knuckle_joint" />
+        <joint name="right_inner_knuckle_joint" />
+        <joint name="right_outer_knuckle_joint" />
+        <joint name="right_outer_finger_joint" />
+        <joint name="right_inner_finger_joint" />
+        <joint name="right_inner_finger_pad_joint" />
+        <joint name="toolside_joint" />
+    </group>
+    <group name="kong_hand">
+        <joint name="soft_robot_joint" />
+        <joint name="rigid_rev_joint" />
+        <joint name="rigid_tip_joint" />
+        <joint name="soft_tip_joint" />
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="hong_go_to_home" group="hong_arm">
+        <joint name="hong_elbow_joint" value="-1.8015" />
+        <joint name="hong_shoulder_lift_joint" value="-1.8517" />
+        <joint name="hong_shoulder_pan_joint" value="-1.1426" />
+        <joint name="hong_wrist_1_joint" value="-1.0686" />
+        <joint name="hong_wrist_2_joint" value="1.5392" />
+        <joint name="hong_wrist_3_joint" value="-1.1065" />
+    </group_state>
+    <group_state name="kong_go_to_home" group="kong_arm">
+        <joint name="kong_elbow_joint" value="2.21255" />
+        <joint name="kong_shoulder_lift_joint" value="-1.37672" />
+        <joint name="kong_shoulder_pan_joint" value="1.39626" />
+        <joint name="kong_wrist_1_joint" value="-2.40262" />
+        <joint name="kong_wrist_2_joint" value="-1.56434" />
+        <joint name="kong_wrist_3_joint" value="0.959931" />
+    </group_state>
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="hong_hand" parent_link="hong_wrist_3_link" group="hong_hand" />
+    <end_effector name="kong_hand" parent_link="kong_wrist_3_link" group="kong_hand" />
+    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+    <virtual_joint name="virtual_joint1" type="fixed" parent_frame="world" child_link="hong_base_link" />
+    <virtual_joint name="virtual_joint2" type="fixed" parent_frame="world" child_link="kong_base_link" />
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="base_link1" link2="fts_robotside" reason="Never" />
+    <disable_collisions link1="base_link1" link2="hong_base_link" reason="Never" />
+    <disable_collisions link1="base_link1" link2="hong_ee_link" reason="Never" />
+    <disable_collisions link1="base_link1" link2="hong_shoulder_link" reason="Never" />
+    <disable_collisions link1="base_link1" link2="hong_upper_arm_link" reason="Never" />
+    <disable_collisions link1="base_link1" link2="hong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="base_link1" link2="hong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="base_link1" link2="hong_wrist_3_link" reason="Never" />
+    <disable_collisions link1="base_link1" link2="kong_ee_link" reason="Never" />
+    <disable_collisions link1="base_link1" link2="kong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="base_link1" link2="kong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="base_link1" link2="kong_wrist_3_link" reason="Adjacent" />
+    <disable_collisions link1="base_link1" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="base_link1" link2="left_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="base_link1" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="base_link1" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="base_link1" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="base_link1" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="base_link1" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="base_link1" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="base_link1" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="base_link1" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="base_link1" link2="rigid_link" reason="Adjacent" />
+    <disable_collisions link1="base_link1" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="base_link1" link2="robot_optical_table_hong" reason="Never" />
+    <disable_collisions link1="base_link1" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="base_link1" link2="soft_tip_link" reason="Adjacent" />
+    <disable_collisions link1="fts_robotside" link2="hong_ee_link" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="hong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="hong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="hong_wrist_3_link" reason="Adjacent" />
+    <disable_collisions link1="fts_robotside" link2="kong_base_link" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="kong_ee_link" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="kong_shoulder_link" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="kong_upper_arm_link" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="kong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="kong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="kong_wrist_3_link" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="left_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="fts_robotside" link2="robotiq_arg2f_base_link" reason="Adjacent" />
+    <disable_collisions link1="fts_robotside" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="hong_shoulder_link" reason="Adjacent" />
+    <disable_collisions link1="hong_base_link" link2="hong_upper_arm_link" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="hong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="kong_base_link" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="kong_ee_link" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="kong_forearm_link" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="kong_shoulder_link" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="kong_upper_arm_link" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="kong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="kong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="kong_wrist_3_link" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="robot_movable_table" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="robot_optical_table_hong" reason="Adjacent" />
+    <disable_collisions link1="hong_base_link" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="hong_base_link" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="hong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="hong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="hong_wrist_3_link" reason="Adjacent" />
+    <disable_collisions link1="hong_ee_link" link2="kong_base_link" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="kong_ee_link" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="kong_forearm_link" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="kong_shoulder_link" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="kong_upper_arm_link" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="kong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="kong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="kong_wrist_3_link" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="left_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="hong_ee_link" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="hong_forearm_link" link2="hong_upper_arm_link" reason="Adjacent" />
+    <disable_collisions link1="hong_forearm_link" link2="hong_wrist_1_link" reason="Adjacent" />
+    <disable_collisions link1="hong_forearm_link" link2="kong_base_link" reason="Never" />
+    <disable_collisions link1="hong_forearm_link" link2="kong_ee_link" reason="Never" />
+    <disable_collisions link1="hong_forearm_link" link2="kong_shoulder_link" reason="Never" />
+    <disable_collisions link1="hong_forearm_link" link2="kong_upper_arm_link" reason="Never" />
+    <disable_collisions link1="hong_forearm_link" link2="kong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="hong_forearm_link" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="hong_forearm_link" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="hong_upper_arm_link" reason="Adjacent" />
+    <disable_collisions link1="hong_shoulder_link" link2="hong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="hong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="kong_base_link" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="kong_ee_link" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="kong_forearm_link" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="kong_shoulder_link" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="kong_upper_arm_link" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="kong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="kong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="kong_wrist_3_link" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="robot_movable_table" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="robot_optical_table_hong" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="hong_shoulder_link" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="hong_upper_arm_link" link2="kong_base_link" reason="Never" />
+    <disable_collisions link1="hong_upper_arm_link" link2="kong_ee_link" reason="Never" />
+    <disable_collisions link1="hong_upper_arm_link" link2="kong_forearm_link" reason="Never" />
+    <disable_collisions link1="hong_upper_arm_link" link2="kong_shoulder_link" reason="Never" />
+    <disable_collisions link1="hong_upper_arm_link" link2="kong_upper_arm_link" reason="Never" />
+    <disable_collisions link1="hong_upper_arm_link" link2="kong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="hong_upper_arm_link" link2="kong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="hong_upper_arm_link" link2="kong_wrist_3_link" reason="Never" />
+    <disable_collisions link1="hong_upper_arm_link" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="hong_upper_arm_link" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="hong_upper_arm_link" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="hong_wrist_2_link" reason="Adjacent" />
+    <disable_collisions link1="hong_wrist_1_link" link2="hong_wrist_3_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="kong_base_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="kong_ee_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="kong_forearm_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="kong_shoulder_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="kong_upper_arm_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="kong_wrist_3_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="left_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_1_link" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="hong_wrist_3_link" reason="Adjacent" />
+    <disable_collisions link1="hong_wrist_2_link" link2="kong_base_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="kong_ee_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="kong_shoulder_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="kong_upper_arm_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="kong_wrist_3_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="left_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_2_link" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="kong_base_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="kong_ee_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="kong_forearm_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="kong_shoulder_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="kong_upper_arm_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="kong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="kong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="kong_wrist_3_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="left_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="hong_wrist_3_link" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="kong_ee_link" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="kong_shoulder_link" reason="Adjacent" />
+    <disable_collisions link1="kong_base_link" link2="kong_upper_arm_link" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="kong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="kong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="left_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="robot_movable_table" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="robot_optical_table_hong" reason="Never" />
+    <disable_collisions link1="kong_base_link" link2="robot_optical_table_kong" reason="Adjacent" />
+    <disable_collisions link1="kong_base_link" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="kong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="kong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="kong_wrist_3_link" reason="Adjacent" />
+    <disable_collisions link1="kong_ee_link" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="left_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="robot_optical_table_hong" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="kong_ee_link" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="kong_forearm_link" link2="kong_upper_arm_link" reason="Adjacent" />
+    <disable_collisions link1="kong_forearm_link" link2="kong_wrist_1_link" reason="Adjacent" />
+    <disable_collisions link1="kong_forearm_link" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_forearm_link" link2="left_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_forearm_link" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_forearm_link" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_forearm_link" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_forearm_link" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_forearm_link" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_forearm_link" link2="robot_optical_table_hong" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="kong_upper_arm_link" reason="Adjacent" />
+    <disable_collisions link1="kong_shoulder_link" link2="kong_wrist_1_link" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="kong_wrist_2_link" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="left_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="robot_movable_table" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="robot_optical_table_hong" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="kong_shoulder_link" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="kong_upper_arm_link" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_upper_arm_link" link2="left_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_upper_arm_link" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_upper_arm_link" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_upper_arm_link" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_upper_arm_link" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_upper_arm_link" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_upper_arm_link" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_upper_arm_link" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_upper_arm_link" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_upper_arm_link" link2="robot_optical_table_hong" reason="Never" />
+    <disable_collisions link1="kong_upper_arm_link" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="kong_wrist_2_link" reason="Adjacent" />
+    <disable_collisions link1="kong_wrist_1_link" link2="kong_wrist_3_link" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="left_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="robot_optical_table_hong" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="kong_wrist_1_link" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="kong_wrist_3_link" reason="Adjacent" />
+    <disable_collisions link1="kong_wrist_2_link" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="left_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="robot_optical_table_hong" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="kong_wrist_2_link" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="left_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="left_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="robot_optical_table_hong" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="kong_wrist_3_link" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="left_inner_finger" link2="left_inner_finger_pad" reason="Adjacent" />
+    <disable_collisions link1="left_inner_finger" link2="left_inner_knuckle" reason="Default" />
+    <disable_collisions link1="left_inner_finger" link2="left_outer_finger" reason="Adjacent" />
+    <disable_collisions link1="left_inner_finger" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="left_inner_finger" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="left_inner_finger" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="left_inner_finger" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="left_inner_finger" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="left_inner_finger" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="left_inner_finger" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="left_inner_finger" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="left_inner_finger" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="left_inner_finger" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="left_inner_finger" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="left_inner_finger_pad" link2="left_inner_knuckle" reason="Never" />
+    <disable_collisions link1="left_inner_finger_pad" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="left_inner_finger_pad" link2="left_outer_knuckle" reason="Never" />
+    <disable_collisions link1="left_inner_finger_pad" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="left_inner_finger_pad" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="left_inner_finger_pad" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="left_inner_finger_pad" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="left_inner_finger_pad" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="left_inner_finger_pad" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="left_inner_finger_pad" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="left_inner_finger_pad" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="left_inner_finger_pad" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="left_inner_knuckle" link2="left_outer_finger" reason="Never" />
+    <disable_collisions link1="left_inner_knuckle" link2="left_outer_knuckle" reason="Default" />
+    <disable_collisions link1="left_inner_knuckle" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="left_inner_knuckle" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="left_inner_knuckle" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="left_inner_knuckle" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="left_inner_knuckle" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="left_inner_knuckle" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="left_inner_knuckle" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="left_inner_knuckle" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="left_inner_knuckle" link2="robotiq_arg2f_base_link" reason="Adjacent" />
+    <disable_collisions link1="left_inner_knuckle" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="left_outer_finger" link2="left_outer_knuckle" reason="Adjacent" />
+    <disable_collisions link1="left_outer_finger" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="left_outer_finger" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="left_outer_finger" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="left_outer_finger" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="left_outer_finger" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="left_outer_finger" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="left_outer_finger" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="left_outer_finger" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="left_outer_finger" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="left_outer_finger" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="left_outer_knuckle" link2="right_inner_finger" reason="Never" />
+    <disable_collisions link1="left_outer_knuckle" link2="right_inner_finger_pad" reason="Never" />
+    <disable_collisions link1="left_outer_knuckle" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="left_outer_knuckle" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="left_outer_knuckle" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="left_outer_knuckle" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="left_outer_knuckle" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="left_outer_knuckle" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="left_outer_knuckle" link2="robotiq_arg2f_base_link" reason="Adjacent" />
+    <disable_collisions link1="left_outer_knuckle" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="right_inner_finger" link2="right_inner_finger_pad" reason="Adjacent" />
+    <disable_collisions link1="right_inner_finger" link2="right_inner_knuckle" reason="Default" />
+    <disable_collisions link1="right_inner_finger" link2="right_outer_finger" reason="Adjacent" />
+    <disable_collisions link1="right_inner_finger" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="right_inner_finger" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="right_inner_finger" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="right_inner_finger" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="right_inner_finger" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="right_inner_finger" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="right_inner_finger_pad" link2="right_inner_knuckle" reason="Never" />
+    <disable_collisions link1="right_inner_finger_pad" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="right_inner_finger_pad" link2="right_outer_knuckle" reason="Never" />
+    <disable_collisions link1="right_inner_finger_pad" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="right_inner_finger_pad" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="right_inner_finger_pad" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="right_inner_finger_pad" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="right_inner_finger_pad" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="right_inner_knuckle" link2="right_outer_finger" reason="Never" />
+    <disable_collisions link1="right_inner_knuckle" link2="right_outer_knuckle" reason="Default" />
+    <disable_collisions link1="right_inner_knuckle" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="right_inner_knuckle" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="right_inner_knuckle" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="right_inner_knuckle" link2="robotiq_arg2f_base_link" reason="Adjacent" />
+    <disable_collisions link1="right_inner_knuckle" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="right_outer_finger" link2="right_outer_knuckle" reason="Adjacent" />
+    <disable_collisions link1="right_outer_finger" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="right_outer_finger" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="right_outer_finger" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="right_outer_finger" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="right_outer_finger" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="right_outer_knuckle" link2="rigid_link" reason="Never" />
+    <disable_collisions link1="right_outer_knuckle" link2="rigid_tip_link" reason="Never" />
+    <disable_collisions link1="right_outer_knuckle" link2="robot_optical_table_kong" reason="Never" />
+    <disable_collisions link1="right_outer_knuckle" link2="robotiq_arg2f_base_link" reason="Adjacent" />
+    <disable_collisions link1="right_outer_knuckle" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="rigid_link" link2="rigid_tip_link" reason="Adjacent" />
+    <disable_collisions link1="rigid_link" link2="robot_optical_table_hong" reason="Never" />
+    <disable_collisions link1="rigid_link" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="rigid_link" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="rigid_tip_link" link2="robot_optical_table_hong" reason="Never" />
+    <disable_collisions link1="rigid_tip_link" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="rigid_tip_link" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="robot_movable_table" link2="robot_optical_table_hong" reason="Adjacent" />
+    <disable_collisions link1="robot_movable_table" link2="robot_optical_table_kong" reason="Adjacent" />
+    <disable_collisions link1="robot_optical_table_hong" link2="robot_optical_table_kong" reason="Adjacent" />
+    <disable_collisions link1="robot_optical_table_hong" link2="soft_tip_link" reason="Never" />
+    <disable_collisions link1="robot_optical_table_kong" link2="robotiq_arg2f_base_link" reason="Never" />
+    <disable_collisions link1="robotiq_arg2f_base_link" link2="soft_tip_link" reason="Never" />
+</robot>
