@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com)
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="robot_optical_table_kong">
+
+  <link
+    name="robot_optical_table_kong">
+    <inertial>
+      <origin
+        xyz="0 0 0.7"
+        rpy="0 0 -1.5707963267949" />
+      <mass
+        value="171" />
+      <inertia
+        ixx="31.349"
+        ixy="2.6626E-15"
+        ixz="-7.8063E-15"
+        iyy="79.054"
+        iyz="-1.76902539520067E-15"
+        izz="64.086" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0.7"
+        rpy="0 0 -1.5707963267949" />
+      <geometry>
+        <mesh
+          filename="package://dual_description/meshes/robot_optical_table.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.4 0.6 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0.7"
+        rpy="0 0 -1.5707963267949" />
+      <geometry>
+        <mesh
+          filename="package://dual_description/meshes/robot_optical_table.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+</robot>

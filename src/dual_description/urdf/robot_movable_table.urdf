@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com)
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="robot_movable_table">
+  <link
+    name="robot_movable_table">
+    <inertial>
+      <origin
+        xyz="0 0 0.655"
+        rpy="0 0 1.5707963267949" />
+      <mass
+        value="74.2" />
+      <inertia
+        ixx="7.272"
+        ixy="2.4411E-16"
+        ixz="-1.9516E-15"
+        iyy="15.307"
+        iyz="-4.91505780745536E-16"
+        izz="14.14" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0.655"
+        rpy="0 0 1.5707963267949" />
+      <geometry>
+        <mesh
+          filename="package://dual_description/meshes/robot_movable_table.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.6 0.6 0.8 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0.655"
+        rpy="0 0 1.5707963267949" />
+      <geometry>
+        <mesh
+          filename="package://dual_description/meshes/robot_movable_table.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>
