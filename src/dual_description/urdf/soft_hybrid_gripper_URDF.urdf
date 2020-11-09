@@ -86,7 +86,7 @@
   </link>
   <joint
     name="rigid_rev_joint2"
-    type="revolute">
+    type="continuous">
     <origin
       xyz="-0.018 0.0604 0.031"
       rpy="0 0 0" />
@@ -97,8 +97,8 @@
     <axis
       xyz="0 -1 0" />
     <limit
-      lower="0"
-      upper="0"
+      lower="${-pi}"
+      upper="${pi}"
       effort="0"
       velocity="0" />
   </joint>
