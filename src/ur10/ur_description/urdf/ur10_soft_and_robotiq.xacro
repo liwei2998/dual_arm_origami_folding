@@ -10,8 +10,10 @@
 
     <xacro:include filename="$(find ur_description)/urdf/ur10.urdf.xacro" />
     <xacro:include filename="$(find ur_description)/urdf/ur10_kong.urdf.xacro" />
+    <xacro:include filename="$(find robotiq_ft_sensor)/urdf/robotiq_fts150.urdf.xacro" />
+    <xacro:include filename="$(find robotiq_2f_140_gripper_visualization)/urdf/robotiq_arg2f_140_model_macro.xacro" />
+    <!--<xacro:include filename="$(find dual_description)/urdf/soft_gripper_urdf.urdf" />-->
     <xacro:include filename="$(find dual_description)/urdf/soft_hybrid_gripper_URDF.urdf" />
-    <xacro:include filename="$(find dual_description)/urdf/soft_hybrid_gripper2_URDF.urdf" />
     <xacro:include filename="$(find dual_description)/urdf/robot_movable_table.urdf" />
     <xacro:include filename="$(find dual_description)/urdf/robot_optical_table_hong.urdf" />
     <xacro:include filename="$(find dual_description)/urdf/robot_optical_table_kong.urdf" />
@@ -40,17 +42,25 @@
     transmission_hw_interface="$(arg transmission_hw_interface)"
     kinematics_file="${load_yaml('$(arg kinematics_config_kong)')}" />
 
-    <!-- soft gripper -->
-    <joint name="soft_robot_joint_kong" type="fixed">
-        <parent link="kong_tool0"/>
-        <child link="base_link2"/>
-        <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
+    <!-- force torque sensor -->
+    <xacro:robotiq_fts150 prefix="" parent="hong_tool0" >
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:robotiq_fts150>
+
+    <!-- robotiq_arg2f_140 -->
+    <xacro:robotiq_arg2f_140 prefix=""/>
+
+    <joint name="ft_gripper_joint" type="fixed">
+     <parent link="robotiq_ft_frame_id"/>
+     <child link="robotiq_arg2f_base_link"/>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
     </joint>
 
-    <joint name="soft_robot_joint_hong" type="fixed">
-        <parent link="hong_tool0"/>
-        <child link="base_link1"/>
-        <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
+    <!-- soft gripper -->
+    <joint name="soft_robot_joint" type="fixed">
+     <parent link="kong_tool0"/>
+     <child link="base_link1"/>
+     <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
     </joint>
 
     <!--environment-->
