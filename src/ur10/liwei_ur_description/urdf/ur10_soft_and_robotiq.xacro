@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="dual_ur10" >
+
+    <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+
+    <!-- common stuff -->
+    <xacro:include filename="$(find liwei_ur_description)/urdf/common.gazebo.xacro" />
+
+    <!-- ur10 -->
+
+    <xacro:include filename="$(find liwei_ur_description)/urdf/ur10.urdf.xacro" />
+    <xacro:include filename="$(find liwei_ur_description)/urdf/ur10_kong.urdf.xacro" />
+    <xacro:include filename="$(find robotiq_ft_sensor)/urdf/robotiq_fts150.urdf.xacro" />
+    <xacro:include filename="$(find robotiq_2f_140_gripper_visualization)/urdf/robotiq_arg2f_140_model_macro.xacro" />
+    <!--<xacro:include filename="$(find dual_description)/urdf/soft_gripper_urdf.urdf" />-->
+    <xacro:include filename="$(find dual_description)/urdf/soft_hybrid_gripper_URDF.urdf" />
+    <xacro:include filename="$(find dual_description)/urdf/robot_movable_table.urdf" />
+    <xacro:include filename="$(find dual_description)/urdf/robot_optical_table_hong.urdf" />
+    <xacro:include filename="$(find dual_description)/urdf/robot_optical_table_kong.urdf" />
+
+    <!-- arm -->
+    <xacro:arg name="kinematics_config" default="$(find liwei_ur_description)/config/ur10_default.yaml"/>
+    <xacro:ur10_robot prefix="hong_" joint_limited="false"
+    shoulder_pan_lower_limit="${-2*pi}" shoulder_pan_upper_limit="${2*pi}"
+    shoulder_lift_lower_limit="${-2*pi}" shoulder_lift_upper_limit="${2*pi}"
+    elbow_joint_lower_limit="${-2*pi}" elbow_joint_upper_limit="${2*pi}"
+    wrist_1_lower_limit="${-2*pi}" wrist_1_upper_limit="${2*pi}"
+    wrist_2_lower_limit="${-2*pi}" wrist_2_upper_limit="${2*pi}"
+    wrist_3_lower_limit="${-2*pi}" wrist_3_upper_limit="${2*pi}"
+    transmission_hw_interface="$(arg transmission_hw_interface)"
+    kinematics_file="${load_yaml('$(arg kinematics_config)')}" />
+
+
+    <xacro:arg name="kinematics_config_kong" default="$(find liwei_ur_description)/config/ur10_default.yaml"/>
+    <xacro:ur10_robot_kong prefix="kong_" joint_limited="false"
+    shoulder_pan_lower_limit="${-2*pi}" shoulder_pan_upper_limit="${2*pi}"
+    shoulder_lift_lower_limit="${-2*pi}" shoulder_lift_upper_limit="${2*pi}"
+    elbow_joint_lower_limit="${-2*pi}" elbow_joint_upper_limit="${2*pi}"
+    wrist_1_lower_limit="${-2*pi}" wrist_1_upper_limit="${2*pi}"
+    wrist_2_lower_limit="${-2*pi}" wrist_2_upper_limit="${2*pi}"
+    wrist_3_lower_limit="${-2*pi}" wrist_3_upper_limit="${2*pi}"
+    transmission_hw_interface="$(arg transmission_hw_interface)"
+    kinematics_file="${load_yaml('$(arg kinematics_config_kong)')}" />
+
+    <!-- force torque sensor -->
+    <xacro:robotiq_fts150 prefix="" parent="hong_tool0" >
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:robotiq_fts150>
+
+    <!-- robotiq_arg2f_140 -->
+    <xacro:robotiq_arg2f_140 prefix=""/>
+
+    <joint name="ft_gripper_joint" type="fixed">
+     <parent link="robotiq_ft_frame_id"/>
+     <child link="robotiq_arg2f_base_link"/>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <!-- soft gripper -->
+    <joint name="soft_robot_joint" type="fixed">
+     <parent link="kong_tool0"/>
+     <child link="base_link1"/>
+     <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
+    </joint>
+
+    <!--environment-->
+    <link name="world" />
+
+    <joint name="world_to_movable_table" type="fixed">
+        <parent link="world" />
+        <child link="robot_movable_table" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
+
+    <joint name="world_to_optical_table_hong" type="fixed">
+        <parent link="world" />
+        <child link="robot_optical_table_hong" />
+        <origin xyz="-1.35 0 0" rpy="0 0 0" />
+    </joint>
+
+    <joint name="world_to_optical_table_kong" type="fixed">
+        <parent link="world" />
+        <child link="robot_optical_table_kong" />
+        <origin xyz="1.35 0 0" rpy="0 0 0" />
+    </joint>
+
+    <joint name="optical_table_to_hong" type="fixed">
+        <parent link="robot_optical_table_hong" />
+        <child link = "hong_base_link" />
+        <origin xyz="0.465 0 0.77" rpy="0.0 0.0 ${pi/2}" />
+    </joint>
+
+    <joint name="optical_table_to_kong" type="fixed">
+        <parent link="robot_optical_table_kong" />
+        <child link = "kong_base_link" />
+        <origin xyz="-0.465 0 0.77" rpy="0.0 0.0 ${-pi/2}" />
+    </joint>
+
+</robot>
