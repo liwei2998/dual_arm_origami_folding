@@ -5,7 +5,7 @@
 <robot
   name="soft hybrid gripper URDF">
   <link
-    name="base_link2">
+    name="base_link1">
     <inertial>
       <origin
         xyz="0.000176879397903153 0.0171745476796605 0.00798016750513526"
@@ -45,7 +45,7 @@
     </collision>
   </link>
   <link
-    name="rigid_link2">
+    name="rigid_link1">
     <inertial>
       <origin
         xyz="0.00246082393825808 0.00389924820387103 0.0131191901389871"
@@ -85,15 +85,15 @@
     </collision>
   </link>
   <joint
-    name="rigid_rev_joint2"
+    name="rigid_rev_joint1"
     type="revolute">
     <origin
       xyz="-0.018 0.0604 0.031"
       rpy="0 0 0" />
     <parent
-      link="base_link2" />
+      link="base_link1" />
     <child
-      link="rigid_link2" />
+      link="rigid_link1" />
     <axis
       xyz="0 -1 0" />
     <limit
@@ -103,7 +103,7 @@
       velocity="0" />
   </joint>
   <link
-    name="rigid_tip_link2">
+    name="rigid_tip_link1">
     <inertial>
       <origin
         xyz="0.00774095772540574 -0.000850000000000101 -0.0611318896625747"
@@ -143,20 +143,20 @@
     </collision>
   </link>
   <joint
-    name="rigid_tip_joint2"
+    name="rigid_tip_joint1"
     type="continuous">
     <origin
       xyz="0.029389 -0.00085 0.11906"
       rpy="0 -0.13252 -3.1416" />
     <parent
-      link="rigid_link2" />
+      link="rigid_link1" />
     <child
-      link="rigid_tip_link2" />
+      link="rigid_tip_link1" />
     <axis
       xyz="0 1 0" />
   </joint>
   <link
-    name="soft_tip_link2">
+    name="soft_tip_link1">
     <inertial>
       <origin
         xyz="-0.0672819098084754 -5.77278610192078E-08 -0.00123656065002749"
@@ -196,15 +196,15 @@
     </collision>
   </link>
   <joint
-    name="soft_tip_joint2"
+    name="soft_tip_joint1"
     type="fixed">
     <origin
       xyz="0.11681 0.061 0.098742"
       rpy="0 -0.66549 0" />
     <parent
-      link="base_link2" />
+      link="base_link1" />
     <child
-      link="soft_tip_link2" />
+      link="soft_tip_link1" />
     <axis
       xyz="0 0 0" />
   </joint>
