@@ -17,8 +17,9 @@ controller_list:
       - kong_wrist_3_joint
   - name: fake_hong_hand_controller
     joints:
-      - finger_joint
+      - rigid_rev_joint1
+      - rigid_tip_joint1
   - name: fake_kong_hand_controller
     joints:
-      - rigid_rev_joint
-      - rigid_tip_joint
+      - rigid_rev_joint2
+      - rigid_tip_joint2

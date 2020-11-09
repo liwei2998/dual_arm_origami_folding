@@ -15,15 +15,16 @@ hardware_interface:
     - hong_wrist_1_joint
     - hong_wrist_2_joint
     - hong_wrist_3_joint
-    - finger_joint
+    - rigid_rev_joint1
+    - rigid_tip_joint1
     - kong_shoulder_pan_joint
     - kong_shoulder_lift_joint
     - kong_elbow_joint
     - kong_wrist_1_joint
     - kong_wrist_2_joint
     - kong_wrist_3_joint
-    - rigid_rev_joint
-    - rigid_tip_joint
+    - rigid_rev_joint2
+    - rigid_tip_joint2
   sim_control_mode: 1  # 0: position, 1: velocity
 # Publish all joint states
 # Creates the /joint_states topic necessary in ROS
