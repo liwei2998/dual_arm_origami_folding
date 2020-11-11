@@ -62,240 +62,74 @@
     <disable_collisions link1="base_link1" link2="hong_wrist_1_link" reason="Never" />
     <disable_collisions link1="base_link1" link2="hong_wrist_2_link" reason="Never" />
     <disable_collisions link1="base_link1" link2="hong_wrist_3_link" reason="Adjacent" />
-    <disable_collisions link1="base_link1" link2="kong_base_link" reason="Never" />
-    <disable_collisions link1="base_link1" link2="kong_ee_link" reason="Never" />
-    <disable_collisions link1="base_link1" link2="kong_forearm_link" reason="Never" />
-    <disable_collisions link1="base_link1" link2="kong_shoulder_link" reason="Never" />
-    <disable_collisions link1="base_link1" link2="kong_upper_arm_link" reason="Never" />
-    <disable_collisions link1="base_link1" link2="kong_wrist_1_link" reason="Never" />
-    <disable_collisions link1="base_link1" link2="kong_wrist_2_link" reason="Never" />
-    <disable_collisions link1="base_link1" link2="kong_wrist_3_link" reason="Never" />
     <disable_collisions link1="base_link1" link2="rigid_link1" reason="Adjacent" />
-    <disable_collisions link1="base_link1" link2="rigid_tip_link1" reason="Never" />
-    <disable_collisions link1="base_link1" link2="rigid_tip_link2" reason="Never" />
-    <disable_collisions link1="base_link1" link2="robot_optical_table_kong" reason="Never" />
     <disable_collisions link1="base_link1" link2="soft_tip_link1" reason="Adjacent" />
-    <disable_collisions link1="base_link2" link2="hong_base_link" reason="Never" />
-    <disable_collisions link1="base_link2" link2="hong_ee_link" reason="Never" />
-    <disable_collisions link1="base_link2" link2="hong_forearm_link" reason="Never" />
-    <disable_collisions link1="base_link2" link2="hong_shoulder_link" reason="Never" />
-    <disable_collisions link1="base_link2" link2="hong_upper_arm_link" reason="Never" />
-    <disable_collisions link1="base_link2" link2="hong_wrist_1_link" reason="Never" />
-    <disable_collisions link1="base_link2" link2="hong_wrist_2_link" reason="Never" />
-    <disable_collisions link1="base_link2" link2="hong_wrist_3_link" reason="Never" />
-    <disable_collisions link1="base_link2" link2="kong_ee_link" reason="Never" />
     <disable_collisions link1="base_link2" link2="kong_wrist_1_link" reason="Never" />
     <disable_collisions link1="base_link2" link2="kong_wrist_2_link" reason="Never" />
     <disable_collisions link1="base_link2" link2="kong_wrist_3_link" reason="Adjacent" />
-    <disable_collisions link1="base_link2" link2="rigid_link1" reason="Never" />
     <disable_collisions link1="base_link2" link2="rigid_link2" reason="Adjacent" />
-    <disable_collisions link1="base_link2" link2="rigid_tip_link1" reason="Never" />
-    <disable_collisions link1="base_link2" link2="rigid_tip_link2" reason="Never" />
-    <disable_collisions link1="base_link2" link2="robot_optical_table_hong" reason="Never" />
-    <disable_collisions link1="base_link2" link2="soft_tip_link1" reason="Never" />
     <disable_collisions link1="base_link2" link2="soft_tip_link2" reason="Adjacent" />
     <disable_collisions link1="hong_base_link" link2="hong_shoulder_link" reason="Adjacent" />
     <disable_collisions link1="hong_base_link" link2="hong_upper_arm_link" reason="Never" />
-    <disable_collisions link1="hong_base_link" link2="hong_wrist_1_link" reason="Never" />
-    <disable_collisions link1="hong_base_link" link2="hong_wrist_2_link" reason="Never" />
     <disable_collisions link1="hong_base_link" link2="kong_base_link" reason="Never" />
-    <disable_collisions link1="hong_base_link" link2="kong_ee_link" reason="Never" />
-    <disable_collisions link1="hong_base_link" link2="kong_forearm_link" reason="Never" />
     <disable_collisions link1="hong_base_link" link2="kong_shoulder_link" reason="Never" />
     <disable_collisions link1="hong_base_link" link2="kong_upper_arm_link" reason="Never" />
-    <disable_collisions link1="hong_base_link" link2="kong_wrist_1_link" reason="Never" />
-    <disable_collisions link1="hong_base_link" link2="kong_wrist_2_link" reason="Never" />
-    <disable_collisions link1="hong_base_link" link2="kong_wrist_3_link" reason="Never" />
-    <disable_collisions link1="hong_base_link" link2="rigid_link2" reason="Never" />
-    <disable_collisions link1="hong_base_link" link2="rigid_tip_link2" reason="Never" />
     <disable_collisions link1="hong_base_link" link2="robot_movable_table" reason="Never" />
     <disable_collisions link1="hong_base_link" link2="robot_optical_table_hong" reason="Adjacent" />
     <disable_collisions link1="hong_base_link" link2="robot_optical_table_kong" reason="Never" />
-    <disable_collisions link1="hong_base_link" link2="soft_tip_link2" reason="Never" />
     <disable_collisions link1="hong_ee_link" link2="hong_wrist_1_link" reason="Never" />
     <disable_collisions link1="hong_ee_link" link2="hong_wrist_2_link" reason="Never" />
     <disable_collisions link1="hong_ee_link" link2="hong_wrist_3_link" reason="Adjacent" />
-    <disable_collisions link1="hong_ee_link" link2="kong_base_link" reason="Never" />
-    <disable_collisions link1="hong_ee_link" link2="kong_ee_link" reason="Never" />
-    <disable_collisions link1="hong_ee_link" link2="kong_forearm_link" reason="Never" />
-    <disable_collisions link1="hong_ee_link" link2="kong_shoulder_link" reason="Never" />
-    <disable_collisions link1="hong_ee_link" link2="kong_upper_arm_link" reason="Never" />
-    <disable_collisions link1="hong_ee_link" link2="kong_wrist_1_link" reason="Never" />
-    <disable_collisions link1="hong_ee_link" link2="kong_wrist_2_link" reason="Never" />
-    <disable_collisions link1="hong_ee_link" link2="kong_wrist_3_link" reason="Never" />
-    <disable_collisions link1="hong_ee_link" link2="rigid_link1" reason="Never" />
-    <disable_collisions link1="hong_ee_link" link2="rigid_link2" reason="Never" />
-    <disable_collisions link1="hong_ee_link" link2="rigid_tip_link1" reason="Never" />
-    <disable_collisions link1="hong_ee_link" link2="rigid_tip_link2" reason="Never" />
-    <disable_collisions link1="hong_ee_link" link2="robot_optical_table_kong" reason="Never" />
     <disable_collisions link1="hong_ee_link" link2="soft_tip_link1" reason="Never" />
-    <disable_collisions link1="hong_ee_link" link2="soft_tip_link2" reason="Never" />
     <disable_collisions link1="hong_forearm_link" link2="hong_upper_arm_link" reason="Adjacent" />
     <disable_collisions link1="hong_forearm_link" link2="hong_wrist_1_link" reason="Adjacent" />
-    <disable_collisions link1="hong_forearm_link" link2="kong_base_link" reason="Never" />
-    <disable_collisions link1="hong_forearm_link" link2="kong_ee_link" reason="Never" />
-    <disable_collisions link1="hong_forearm_link" link2="kong_shoulder_link" reason="Never" />
-    <disable_collisions link1="hong_forearm_link" link2="kong_upper_arm_link" reason="Never" />
-    <disable_collisions link1="hong_forearm_link" link2="kong_wrist_3_link" reason="Never" />
-    <disable_collisions link1="hong_forearm_link" link2="rigid_tip_link2" reason="Never" />
-    <disable_collisions link1="hong_forearm_link" link2="robot_optical_table_kong" reason="Never" />
     <disable_collisions link1="hong_shoulder_link" link2="hong_upper_arm_link" reason="Adjacent" />
-    <disable_collisions link1="hong_shoulder_link" link2="hong_wrist_1_link" reason="Never" />
-    <disable_collisions link1="hong_shoulder_link" link2="hong_wrist_2_link" reason="Never" />
     <disable_collisions link1="hong_shoulder_link" link2="kong_base_link" reason="Never" />
-    <disable_collisions link1="hong_shoulder_link" link2="kong_ee_link" reason="Never" />
-    <disable_collisions link1="hong_shoulder_link" link2="kong_forearm_link" reason="Never" />
     <disable_collisions link1="hong_shoulder_link" link2="kong_shoulder_link" reason="Never" />
     <disable_collisions link1="hong_shoulder_link" link2="kong_upper_arm_link" reason="Never" />
-    <disable_collisions link1="hong_shoulder_link" link2="kong_wrist_1_link" reason="Never" />
-    <disable_collisions link1="hong_shoulder_link" link2="kong_wrist_2_link" reason="Never" />
-    <disable_collisions link1="hong_shoulder_link" link2="kong_wrist_3_link" reason="Never" />
-    <disable_collisions link1="hong_shoulder_link" link2="rigid_link2" reason="Never" />
-    <disable_collisions link1="hong_shoulder_link" link2="rigid_tip_link2" reason="Never" />
     <disable_collisions link1="hong_shoulder_link" link2="robot_movable_table" reason="Never" />
     <disable_collisions link1="hong_shoulder_link" link2="robot_optical_table_hong" reason="Never" />
     <disable_collisions link1="hong_shoulder_link" link2="robot_optical_table_kong" reason="Never" />
-    <disable_collisions link1="hong_shoulder_link" link2="soft_tip_link2" reason="Never" />
     <disable_collisions link1="hong_upper_arm_link" link2="kong_base_link" reason="Never" />
-    <disable_collisions link1="hong_upper_arm_link" link2="kong_ee_link" reason="Never" />
-    <disable_collisions link1="hong_upper_arm_link" link2="kong_forearm_link" reason="Never" />
     <disable_collisions link1="hong_upper_arm_link" link2="kong_shoulder_link" reason="Never" />
     <disable_collisions link1="hong_upper_arm_link" link2="kong_upper_arm_link" reason="Never" />
-    <disable_collisions link1="hong_upper_arm_link" link2="kong_wrist_2_link" reason="Never" />
-    <disable_collisions link1="hong_upper_arm_link" link2="kong_wrist_3_link" reason="Never" />
-    <disable_collisions link1="hong_upper_arm_link" link2="rigid_link2" reason="Never" />
-    <disable_collisions link1="hong_upper_arm_link" link2="rigid_tip_link2" reason="Never" />
     <disable_collisions link1="hong_upper_arm_link" link2="robot_optical_table_kong" reason="Never" />
-    <disable_collisions link1="hong_upper_arm_link" link2="soft_tip_link2" reason="Never" />
     <disable_collisions link1="hong_wrist_1_link" link2="hong_wrist_2_link" reason="Adjacent" />
     <disable_collisions link1="hong_wrist_1_link" link2="hong_wrist_3_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_1_link" link2="kong_base_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_1_link" link2="kong_ee_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_1_link" link2="kong_shoulder_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_1_link" link2="kong_upper_arm_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_1_link" link2="kong_wrist_1_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_1_link" link2="kong_wrist_2_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_1_link" link2="kong_wrist_3_link" reason="Never" />
     <disable_collisions link1="hong_wrist_1_link" link2="rigid_link1" reason="Never" />
-    <disable_collisions link1="hong_wrist_1_link" link2="rigid_link2" reason="Never" />
-    <disable_collisions link1="hong_wrist_1_link" link2="rigid_tip_link1" reason="Never" />
-    <disable_collisions link1="hong_wrist_1_link" link2="rigid_tip_link2" reason="Never" />
-    <disable_collisions link1="hong_wrist_1_link" link2="robot_optical_table_kong" reason="Never" />
     <disable_collisions link1="hong_wrist_1_link" link2="soft_tip_link1" reason="Never" />
-    <disable_collisions link1="hong_wrist_1_link" link2="soft_tip_link2" reason="Never" />
     <disable_collisions link1="hong_wrist_2_link" link2="hong_wrist_3_link" reason="Adjacent" />
-    <disable_collisions link1="hong_wrist_2_link" link2="kong_base_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_2_link" link2="kong_ee_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_2_link" link2="kong_forearm_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_2_link" link2="kong_shoulder_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_2_link" link2="kong_upper_arm_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_2_link" link2="kong_wrist_1_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_2_link" link2="kong_wrist_2_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_2_link" link2="kong_wrist_3_link" reason="Never" />
     <disable_collisions link1="hong_wrist_2_link" link2="rigid_link1" reason="Never" />
-    <disable_collisions link1="hong_wrist_2_link" link2="rigid_link2" reason="Never" />
-    <disable_collisions link1="hong_wrist_2_link" link2="rigid_tip_link1" reason="Never" />
-    <disable_collisions link1="hong_wrist_2_link" link2="robot_optical_table_kong" reason="Never" />
-    <disable_collisions link1="hong_wrist_2_link" link2="soft_tip_link1" reason="Never" />
-    <disable_collisions link1="hong_wrist_2_link" link2="soft_tip_link2" reason="Never" />
-    <disable_collisions link1="hong_wrist_3_link" link2="kong_base_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_3_link" link2="kong_ee_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_3_link" link2="kong_forearm_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_3_link" link2="kong_shoulder_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_3_link" link2="kong_upper_arm_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_3_link" link2="kong_wrist_1_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_3_link" link2="kong_wrist_2_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_3_link" link2="kong_wrist_3_link" reason="Never" />
-    <disable_collisions link1="hong_wrist_3_link" link2="rigid_link1" reason="Never" />
-    <disable_collisions link1="hong_wrist_3_link" link2="rigid_link2" reason="Never" />
-    <disable_collisions link1="hong_wrist_3_link" link2="rigid_tip_link1" reason="Never" />
-    <disable_collisions link1="hong_wrist_3_link" link2="rigid_tip_link2" reason="Never" />
-    <disable_collisions link1="hong_wrist_3_link" link2="robot_optical_table_kong" reason="Never" />
     <disable_collisions link1="hong_wrist_3_link" link2="soft_tip_link1" reason="Never" />
-    <disable_collisions link1="hong_wrist_3_link" link2="soft_tip_link2" reason="Never" />
     <disable_collisions link1="kong_base_link" link2="kong_shoulder_link" reason="Adjacent" />
     <disable_collisions link1="kong_base_link" link2="kong_upper_arm_link" reason="Never" />
-    <disable_collisions link1="kong_base_link" link2="kong_wrist_1_link" reason="Never" />
-    <disable_collisions link1="kong_base_link" link2="rigid_link1" reason="Never" />
-    <disable_collisions link1="kong_base_link" link2="rigid_tip_link1" reason="Never" />
     <disable_collisions link1="kong_base_link" link2="robot_movable_table" reason="Never" />
     <disable_collisions link1="kong_base_link" link2="robot_optical_table_hong" reason="Never" />
     <disable_collisions link1="kong_base_link" link2="robot_optical_table_kong" reason="Adjacent" />
-    <disable_collisions link1="kong_base_link" link2="soft_tip_link1" reason="Never" />
     <disable_collisions link1="kong_ee_link" link2="kong_wrist_1_link" reason="Never" />
     <disable_collisions link1="kong_ee_link" link2="kong_wrist_2_link" reason="Never" />
     <disable_collisions link1="kong_ee_link" link2="kong_wrist_3_link" reason="Adjacent" />
-    <disable_collisions link1="kong_ee_link" link2="rigid_link1" reason="Never" />
     <disable_collisions link1="kong_ee_link" link2="rigid_link2" reason="Never" />
-    <disable_collisions link1="kong_ee_link" link2="rigid_tip_link1" reason="Never" />
     <disable_collisions link1="kong_ee_link" link2="rigid_tip_link2" reason="Never" />
-    <disable_collisions link1="kong_ee_link" link2="robot_optical_table_hong" reason="Never" />
-    <disable_collisions link1="kong_ee_link" link2="soft_tip_link1" reason="Never" />
     <disable_collisions link1="kong_ee_link" link2="soft_tip_link2" reason="Never" />
     <disable_collisions link1="kong_forearm_link" link2="kong_upper_arm_link" reason="Adjacent" />
     <disable_collisions link1="kong_forearm_link" link2="kong_wrist_1_link" reason="Adjacent" />
-    <disable_collisions link1="kong_forearm_link" link2="rigid_link1" reason="Never" />
-    <disable_collisions link1="kong_forearm_link" link2="robot_optical_table_hong" reason="Never" />
-    <disable_collisions link1="kong_forearm_link" link2="soft_tip_link1" reason="Never" />
     <disable_collisions link1="kong_shoulder_link" link2="kong_upper_arm_link" reason="Adjacent" />
-    <disable_collisions link1="kong_shoulder_link" link2="kong_wrist_1_link" reason="Never" />
-    <disable_collisions link1="kong_shoulder_link" link2="kong_wrist_2_link" reason="Never" />
-    <disable_collisions link1="kong_shoulder_link" link2="rigid_link1" reason="Never" />
-    <disable_collisions link1="kong_shoulder_link" link2="rigid_tip_link1" reason="Never" />
     <disable_collisions link1="kong_shoulder_link" link2="robot_movable_table" reason="Never" />
     <disable_collisions link1="kong_shoulder_link" link2="robot_optical_table_hong" reason="Never" />
     <disable_collisions link1="kong_shoulder_link" link2="robot_optical_table_kong" reason="Never" />
-    <disable_collisions link1="kong_shoulder_link" link2="soft_tip_link1" reason="Never" />
-    <disable_collisions link1="kong_upper_arm_link" link2="rigid_link1" reason="Never" />
-    <disable_collisions link1="kong_upper_arm_link" link2="rigid_tip_link1" reason="Never" />
     <disable_collisions link1="kong_upper_arm_link" link2="robot_optical_table_hong" reason="Never" />
-    <disable_collisions link1="kong_upper_arm_link" link2="soft_tip_link1" reason="Never" />
     <disable_collisions link1="kong_wrist_1_link" link2="kong_wrist_2_link" reason="Adjacent" />
     <disable_collisions link1="kong_wrist_1_link" link2="kong_wrist_3_link" reason="Never" />
-    <disable_collisions link1="kong_wrist_1_link" link2="rigid_link1" reason="Never" />
     <disable_collisions link1="kong_wrist_1_link" link2="rigid_link2" reason="Never" />
-    <disable_collisions link1="kong_wrist_1_link" link2="rigid_tip_link1" reason="Never" />
-    <disable_collisions link1="kong_wrist_1_link" link2="rigid_tip_link2" reason="Never" />
-    <disable_collisions link1="kong_wrist_1_link" link2="robot_optical_table_hong" reason="Never" />
-    <disable_collisions link1="kong_wrist_1_link" link2="soft_tip_link1" reason="Never" />
     <disable_collisions link1="kong_wrist_1_link" link2="soft_tip_link2" reason="Never" />
     <disable_collisions link1="kong_wrist_2_link" link2="kong_wrist_3_link" reason="Adjacent" />
-    <disable_collisions link1="kong_wrist_2_link" link2="rigid_link1" reason="Never" />
     <disable_collisions link1="kong_wrist_2_link" link2="rigid_link2" reason="Never" />
-    <disable_collisions link1="kong_wrist_2_link" link2="rigid_tip_link1" reason="Never" />
-    <disable_collisions link1="kong_wrist_2_link" link2="rigid_tip_link2" reason="Never" />
-    <disable_collisions link1="kong_wrist_2_link" link2="robot_optical_table_hong" reason="Never" />
-    <disable_collisions link1="kong_wrist_2_link" link2="soft_tip_link1" reason="Never" />
     <disable_collisions link1="kong_wrist_2_link" link2="soft_tip_link2" reason="Never" />
-    <disable_collisions link1="kong_wrist_3_link" link2="rigid_link1" reason="Never" />
-    <disable_collisions link1="kong_wrist_3_link" link2="rigid_link2" reason="Never" />
-    <disable_collisions link1="kong_wrist_3_link" link2="rigid_tip_link1" reason="Never" />
-    <disable_collisions link1="kong_wrist_3_link" link2="rigid_tip_link2" reason="Never" />
-    <disable_collisions link1="kong_wrist_3_link" link2="robot_optical_table_hong" reason="Never" />
-    <disable_collisions link1="kong_wrist_3_link" link2="soft_tip_link1" reason="Never" />
     <disable_collisions link1="kong_wrist_3_link" link2="soft_tip_link2" reason="Never" />
-    <disable_collisions link1="rigid_link1" link2="rigid_link2" reason="Never" />
     <disable_collisions link1="rigid_link1" link2="rigid_tip_link1" reason="Adjacent" />
-    <disable_collisions link1="rigid_link1" link2="rigid_tip_link2" reason="Never" />
-    <disable_collisions link1="rigid_link1" link2="robot_optical_table_kong" reason="Never" />
-    <disable_collisions link1="rigid_link1" link2="soft_tip_link1" reason="Never" />
-    <disable_collisions link1="rigid_link1" link2="soft_tip_link2" reason="Never" />
-    <disable_collisions link1="rigid_link2" link2="rigid_tip_link1" reason="Never" />
     <disable_collisions link1="rigid_link2" link2="rigid_tip_link2" reason="Adjacent" />
-    <disable_collisions link1="rigid_link2" link2="robot_optical_table_hong" reason="Never" />
-    <disable_collisions link1="rigid_link2" link2="soft_tip_link1" reason="Never" />
-    <disable_collisions link1="rigid_link2" link2="soft_tip_link2" reason="Never" />
-    <disable_collisions link1="rigid_tip_link1" link2="rigid_tip_link2" reason="Never" />
-    <disable_collisions link1="rigid_tip_link1" link2="robot_optical_table_kong" reason="Never" />
-    <disable_collisions link1="rigid_tip_link1" link2="soft_tip_link1" reason="Never" />
-    <disable_collisions link1="rigid_tip_link1" link2="soft_tip_link2" reason="Never" />
-    <disable_collisions link1="rigid_tip_link2" link2="robot_optical_table_hong" reason="Never" />
-    <disable_collisions link1="rigid_tip_link2" link2="soft_tip_link1" reason="Never" />
-    <disable_collisions link1="rigid_tip_link2" link2="soft_tip_link2" reason="Never" />
     <disable_collisions link1="robot_movable_table" link2="robot_optical_table_hong" reason="Adjacent" />
     <disable_collisions link1="robot_movable_table" link2="robot_optical_table_kong" reason="Adjacent" />
     <disable_collisions link1="robot_optical_table_hong" link2="robot_optical_table_kong" reason="Adjacent" />
-    <disable_collisions link1="robot_optical_table_hong" link2="soft_tip_link2" reason="Never" />
-    <disable_collisions link1="robot_optical_table_kong" link2="soft_tip_link1" reason="Never" />
-    <disable_collisions link1="soft_tip_link1" link2="soft_tip_link2" reason="Never" />
 </robot>
