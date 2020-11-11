@@ -144,7 +144,7 @@
   </link>
   <joint
     name="rigid_tip_joint1"
-    type="continuous">
+    type="fixed">
     <origin
       xyz="0.029389 -0.00085 0.11906"
       rpy="0 -0.13252 -3.1416" />
