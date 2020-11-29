@@ -3,13 +3,7 @@ import os
 import numpy as np
 import numpy_indexed as npi
 
-class State(object):
-
-    def __init__(self,path):
-        self.path = path
-        self.vertice, self.line, self.face, self.line_to_vertice = self.data_process(path)
-
-class State(object):
+class Config(object):
 
     def __init__(self,path):
         self.path = path
@@ -74,22 +68,33 @@ class State(object):
     def update_path(self, new_path):
         self.path = new_path
 
-class CompareState(object):
-    def __init__(self,state1,state2):
-        self.state1 = state1
-        self.state2 = state2
+class CompareConfig(object):
+    def __init__(self,config1,config2):
+        self.state1 = config1
+        self.state2 = config2
         self.crease_line, self.crease_point, self.manipulatible_vertices = self.getCreaseLineAndManipulatibleVertice()
         self.grasp_solutions = self.getGraspSolutions()
         self.grasp_point, self.grasp_line, self.grasp_method = self.OptimalGraspTechinique()
         self.GP_target_position = self.getGraspPointTargetPosition()
-        self.fix_point, self.fix_line = self.getFixPaperPoints()
+        self.feasible_fix_points, self.fix_line, self.fix_point = self.getFixPaperSolutions()
+        self.DataFormatinMoveit()
 
     def diff(self,arrayA,arrayB):
         #difference
-        diff_a = npi.difference(arrayA,arrayB)
-        diff_b = npi.difference(arrayB,arrayA)
+        a = arrayA.tolist()
+        b = arrayB.tolist()
+        for i in arrayA.tolist():
+            for j in arrayB.tolist():
+                if i == j:
+                    a.remove(j)
+        for i in arrayA.tolist():
+            for j in arrayB.tolist():
+                if j == i:
+                    b.remove(i)
+        a = np.array(a)
+        b = np.array(b)
 
-        return diff_a, diff_b
+        return a, b
 
     def findbyrow(self,mat,row):
         return np.where((mat == row).all(1))[0]
@@ -146,6 +151,7 @@ class CompareState(object):
             elif len(diff_2) == 2:
                 #ensure crease line is clockwise
                 if (v1[f1[0]] == diff_1[0]).all():
+                    crease_point = []
                     crease_line = diff_2[0] - diff_2[1]
                     crease_point.append(diff_2[1])
                     crease_point.append(diff_2[0])
@@ -165,12 +171,20 @@ class CompareState(object):
                     line_temp2.append(temp)
                 line_temp1 = np.array(line_temp1)
                 line_temp2 = np.array(line_temp2)
+
                 _, crease_line = self.diff(line_temp1, line_temp2)
-                crease_line = crease_line.flatten()
-                index = self.findbyrow(line_temp2,crease_line)
-                index = int(index)
-                crease_point.append(v2[f2[index]])
-                crease_point.append(v2[f2[index+1]])
+                #not sure about this determine condition
+                if (crease_line == []).all():
+                    index = self.findbyrow(v2[f2],diff_2)[0]
+                    crease_point.append(v2[f2[index-1]])
+                    crease_point.append(v2[f2[index]])
+                    crease_line = np.array(crease_point[1] - crease_point[0]).flatten()
+                else:
+                    crease_line = crease_line.flatten()
+                    index = self.findbyrow(line_temp2,crease_line)
+                    index = int(index)
+                    crease_point.append(v2[f2[index]])
+                    crease_point.append(v2[f2[index+1]])
 
 
             elif len(diff_2) == 0:
@@ -220,6 +234,7 @@ class CompareState(object):
 
             elif len(count) > 1:
                 action = "scooping"
+
                 grasp_solutions.append([mv[i],connect_lines,action])
 
         return grasp_solutions
@@ -235,8 +250,6 @@ class CompareState(object):
         If there are several choices, choose the one that minimize the angle between the grasp line and crease line.
         '''
         grasp = self.grasp_solutions
-        # transform 45 degree in the plane
-#         trans45 = np.array([[0.7071,0.7071,0],[-0.7071,0.7071,0],[0,0,1]])
         #step1: if only one technique, choose the only one
         if len(grasp) == 1:
             grasp_point = grasp[0][0]
@@ -304,13 +317,15 @@ class CompareState(object):
         dis = np.sqrt(pow(dx,2) + pow(dy,2))
         return dis
 
-    def getFixPaperPoints(self):
+    def getFixPaperSolutions(self):
         #currently we assume that paper must be fixed at the same layer as the new added crease's
         '''
-        This function is used to find two points for paper fixing. For the two points, one is the fix point,
-            the other is the adjacent point of the fix point, complying with the fix_paper function.
-        Logic: a) fix point and grasp point are on the different side of crease line.
-               b) distance between fix point and GR_target_position is max.
+        This function is used to find fix points and fix direction, will output an array of feasible fix points,
+            an array of fix direction and an optimal fix point
+        feasible fix points: feasible fix points and grasp point are on the different side of crease line.
+        fix directions: An array of directions that related to crease line, from the direction of crease line,
+                        rotate to the direction of -1 * crease line, rotate step: pi/6
+                        Clockwise rotating or counterclockwise rotating is deteremined by the grasp point.
         '''
         f1 = self.state1.face
         v1 = self.state1.vertice
@@ -327,44 +342,38 @@ class CompareState(object):
         a,b,c = self.vectortoline(cl,cp[0]) #get crease line function
         symbol1 = a*gp[0] + b*gp[1] +c #symbol of point * line
         distance = []
-        points = []
         for i in range(len(f1)):
             point = v1[f1[i]]
             symbol2 = a*point[0] + b*point[1] + c
             #if the point is on the other side, symbol1*symbol2 < 0
             if symbol1*symbol2 < 0 and abs(symbol2) > 5:
-                sym = symbol2
                 dis = np.linalg.norm(tp - point[:2]) #distance of tp and the point
                 dis1 = np.linalg.norm(gp[:2] - point[:2]) #distance of gp and the point
                 distance.append([dis,dis1,f1[i]])
-                points.append(point)
-        #step3: determine the farthest points
+        #step3: save feasible fix points, and sort by dis and dis1 (from the farthest to the nearest)
         # a) far from target position, and b) far from the grasp position
-        points = np.array(points)
         distance = np.around(np.array(distance), decimals=0)
-        dis_tp_temp = np.array(distance)[:,0] #take the dis_tp
-        dis_tp_temp = dis_tp_temp.tolist()
-        dis_gp_temp = np.array(distance)[:,1] #take the dis_gp
-        dis_gp_temp = dis_gp_temp.tolist()
-        index_tp = distance[np.where(dis_tp_temp == np.amax(dis_tp_temp))][:,2].astype(int)
-        index_gp = distance[np.where(dis_gp_temp == np.amax(dis_gp_temp))][:,2].astype(int)
-        fix_point_tp = v1[f1[index_tp]] #points that have max distance with tp
-        fix_point_gp = v1[f1[index_gp]] #points that have max distance eith gp
-        fix_point = npi.intersection(fix_point_tp,fix_point_gp) #points that have both max distance with tp and gp
-        if len(fix_point) == 0:
-            fix_point = fix_point_gp #id no intersection, choose points have max dis with gp
-        #step4: determine the fix paper line, save several lines in case of collision
+        distance = np.array(sorted(distance, key=(lambda x:x[0]+x[1]), reverse=True)) #sorted by distance
+        index = distance[:,2].astype(int) #take the vertice id
+        feasible_fix_points = v1[index]
+        feasible_fix_points = np.around(np.array(feasible_fix_points), decimals = 3)
+        #step4: determine if clockwise rotate or counterclockwise rotate
+        line_to_grasp = gp - cp[0]
+        cl_temp = cl[0:2] / np.linalg.norm(cl[0:2])
+        cl_temp = np.append(cl_temp,[0])
+        rot = np.cross(cl_temp,line_to_grasp)
         fix_line = []
-        #fix point on the left side of cl
-        if sym < 0:
-            for i in np.arange(np.pi/2,np.pi*7/6,np.pi/6):
-                fix_line.append((np.dot(self.rotate(i),cl)).tolist())
-        #if fix point on right side of cl
-        elif sym > 0:
-            for i in np.arange(-np.pi/2,-np.pi*7/6,-np.pi/6):
-                fix_line.append((np.dot(self.rotate(i),cl)).tolist())
+        #step5: get an array of fix directions
+        #if rot[2] > 0, rotate counterclockwise
+        if rot[2] > 0:
+            for i in np.arange(0,-np.pi*7/6,-np.pi/6):
+                fix_line.append((np.dot(self.rotate(i),cl_temp)).tolist())
+        #if rot[2] < 0, rotate clockwise
+        elif rot[2] < 0:
+            for i in np.arange(0,np.pi*7/6,np.pi/6):
+                fix_line.append((np.dot(self.rotate(i),cl_temp)).tolist())
         fix_line = np.around(np.array(fix_line),decimals = 2)
-        return fix_point, fix_line
+        return feasible_fix_points, fix_line, distance
 
     def DataFormatinMoveit(self):
         #crease
@@ -378,6 +387,10 @@ class CompareState(object):
         self.grasp_point = self.grasp_point / 1000
         self.grasp_point[2] += 0.71
         self.grasp_point = self.grasp_point.tolist()
+        for i in range(len(self.grasp_solutions)):
+            self.grasp_solutions[i][0] = self.grasp_solutions[i][0] / 1000
+            self.grasp_solutions[i][0][2] = self.grasp_solutions[i][0][2] + 0.71
+            self.grasp_solutions[i][0] = self.grasp_solutions[i][0].tolist()
         #GP target
         self.GP_target_position = self.GP_target_position / 1000
         self.GP_target_position[2] += 0.71
@@ -388,3 +401,7 @@ class CompareState(object):
             self.fix_point[i] = self.fix_point[i] / 1000
             self.fix_point[i][2] = self.fix_point[i][2] + 0.71
         self.fix_point = self.fix_point.tolist()
+        for i in range(len(self.feasible_fix_points)):
+            self.feasible_fix_points[i] = self.feasible_fix_points[i] / 1000
+            self.feasible_fix_points[i][2] = self.feasible_fix_points[i][2] + 0.71
+        self.feasible_fix_points = self.feasible_fix_points.tolist()
